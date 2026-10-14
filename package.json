@@ -1,10 +1,11 @@
 {
-  "name": "BlackHole-ThreeJs",
+  "name": "blackhole-threejs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "description": "WebGL 2 Schwarzschild null-geodesic ray tracing with Three.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "private": true
+    "start": "node tools/server.mjs",
+    "dev": "node tools/server.mjs"
+  }
 }

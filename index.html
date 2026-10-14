@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050608">
+    <title>Schwarzschild · Nitrous</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050608'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23e7bf83' stroke-width='3'/%3E%3Cellipse cx='32' cy='32' rx='27' ry='5' fill='none' stroke='%23e7bf83' stroke-width='2'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./style.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/",
+            "lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.21.0/dist/lil-gui.esm.js"
+        }
+    }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas" aria-label="Interactive ray-traced Schwarzschild black hole"></canvas>
+    <div id="startup-overlay" role="status">
+        <div class="startup-content">
+            <div class="loader-orbit" aria-hidden="true"></div>
+            <p class="eyebrow">NITROUS / WEBGL EXPERIMENTS</p>
+            <h1>Tracing the light.</h1>
+            <p id="startup-message">Preparing the sky and spacetime renderer</p>
+        </div>
+    </div>
+    <div id="interface">
+        <header class="masthead">
+            <div class="identity">
+                <p class="eyebrow"><span class="status-dot"></span> NITROUS / FIELD STUDY 01</p>
+                <h1>Schwarzschild</h1>
+                <p class="subtitle">A study of light in curved spacetime.</p>
+            </div>
+            <nav class="toolbar" aria-label="Simulation tools">
+                <button id="pause-button" title="Pause disk animation (Space)" aria-pressed="false">Pause</button>
+                <button id="capture-button" title="Save the rendered image (P)">Capture</button>
+                <button id="fullscreen-button" title="Toggle fullscreen (F)">Fullscreen</button>
+                <button id="settings-button" title="Open controls" aria-expanded="false">Controls <span aria-hidden="true">+</span></button>
+            </nav>
+        </header>
+        <div id="gui-container" hidden></div>
+        <footer class="footer">
+            <div class="model-info">
+                <p class="eyebrow">NON-ROTATING / UNCHARGED</p>
+                <p class="model-equation">r<sub>s</sub> = 2GM / c²</p>
+                <p class="model-note">Horizon 1 r<sub>s</sub> <span>·</span> Photon sphere 1.5 r<sub>s</sub> <span>·</span> ISCO 3 r<sub>s</sub></p>
+            </div>
+            <div class="view-selector" role="group" aria-label="Camera viewpoints">
+                <button data-view="cinematic" class="active" aria-pressed="true">Cinematic</button>
+                <button data-view="overview" aria-pressed="false">Above the disk</button>
+                <button data-view="edge" aria-pressed="false">Edge on</button>
+            </div>
+            <div class="telemetry">
+                <p><span id="fps-value">—</span> <span class="unit">FPS</span><span class="divider">/</span><span id="quality-value">HIGH</span></p>
+                <p id="resolution-value">Initializing renderer</p>
+            </div>
+        </footer>
+        <div class="interaction-hint">DRAG TO ORBIT <span>·</span> SCROLL TO APPROACH <span>·</span> H TO HIDE UI</div>
+    </div>
+    <div id="toast" role="status"></div>
+    <noscript>This simulation requires JavaScript and WebGL 2.</noscript>
+    <script type="module">
+        import('./main.js').catch(error => {
+            console.error(error);
+            document.querySelector('.startup-content h1').textContent = 'Unable to load the simulation';
+            document.getElementById('startup-message').textContent = location.protocol === 'file:'
+                ? 'Use WebStorm’s Open in Browser command or npm start to serve this folder over HTTP.'
+                : 'Check your internet connection: the pinned Three.js and lil-gui libraries load from cdn.jsdelivr.net. Details are in the browser console.';
+        });
+    </script>
+</body>
+</html>
